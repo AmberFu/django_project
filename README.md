@@ -1,4 +1,4 @@
-# Use Django to build REAT API
+# Django with RESTful API
 
 ### How to start a Django project
 
