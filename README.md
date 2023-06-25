@@ -34,5 +34,85 @@ Quit the server with CONTROL-C.
 Not Found: /favicon.ico
 [25/Jun/2023 01:47:38] "GET /favicon.ico HTTP/1.1" 404 2118
 
+```
+
+### Creating the Polls app (follow the tutorial)
+
+```
+## Create a polls APP
+$ ls
+db.sqlite3  django_project  manage.py  README.md
+
+$ python manage.py startapp polls
+
+$ ls
+db.sqlite3  django_project  manage.py  polls  README.md
+ 
+$ ls polls 
+admin.py  __init__.py  models.py  views.py
+apps.py   migrations   tests.py
+
+```
+
+### Write your first view - Edit `polls/views.py`
+
+```
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+```
+This is the simplest view possible in Django. 
+
+To call the view, we need to map it to a URL - and for this we need a URLconf.
+
+To create a URLconf in the polls directory, create a file called `urls.py`. Your app directory should now look like:
+
+```
+polls/
+    __init__.py
+    admin.py
+    apps.py
+    migrations/
+        __init__.py
+    models.py
+    tests.py
+    urls.py
+    views.py
+```
+
+In the `polls/urls.py` file include the following code:
+
+```
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+```
+
+The next step is to point the root URLconf at the `polls.urls` module. 
+
+In `mysite/urls.py`, add an import for `django.urls.include` and insert an include() in the urlpatterns list, so you have:
+
+```
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+]
+
+```
+The include() function allows referencing other URLconfs.
+
+You have now wired an index view into the URLconf. Verify it’s working with the following command:
+
+```
+$ python manage.py runserver
 
 ```
