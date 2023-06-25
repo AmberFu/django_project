@@ -2,6 +2,8 @@
 
 ### How to start a Django project
 
+Follow [Django Tutorial](https://docs.djangoproject.com/en/3.2/intro/tutorial01/)
+
 ```
 ## Set up a virtual env
 $ conda create -n my_django_env python=3.7 django
